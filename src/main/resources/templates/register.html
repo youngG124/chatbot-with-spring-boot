@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+	<div class="container">
+		<form th:action="@{/users/new2.do}"
+		th:object="${user}" method="post" 
+		onsubmit="return registerUser(this)">
+			<h1>회원가입</h1>
+			
+			<div class="form-group">
+		           <label for="inputId">userId</label>
+		           <input type="text" th:field="*{userId}" class="form-control" id="inputEmail4" name="userId" placeholder="사용자 아이디">
+		    </div>
+		    
+		    <div class="form-group">
+		           <label for="inputName">userName</label>
+		           <input type="text" th:field="*{userName}" class="form-control" id="inputAddress" name="userName" placeholder="사용자 이름">
+		    </div>
+		    
+		    <div class="form-group">
+		           <label for="inputPassword">password</label>
+		           <input type="password" th:field="*{userPw}" class="form-control" id="inputPassword4" name="userPw" placeholder="사용자 비밀번호">
+		    </div>
+		    
+		    <button id="submit" type="submit" class="btn btn-primary">가입 완료</button>
+		</form>
+	 </div>
+</body>
+</html>
+
+<script type="text/javascript">
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+$(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
+
+/* function registerUser(form) {
+	var result = (
+			isValid(form.name, "이름", null, null)
+			&& isValid(form.password, "비밀번호", null, null)
+			&& isValid(form.auth, "권한", null, null)
+	);
+} */
+
+
+/* $(function(){
+	$("button[id='submit']").on("click", function() {
+		console.log("button clicked");
+	});
+	var user = {
+			username : document.getElementById('inputEmail4'),
+			userauth : document.getElementById('inputAddress'),
+			userid : document.getElementById('inputPassword4'),
+			userpw : document.getElementById('inputAuth')
+	};
+	
+	//register(user);
+});
+
+function register(user, callback, error) {
+	$.ajax({
+		type : 'post',
+		url : '/users/new',
+		data : JSON.stringify(user),
+		contentType : "application:json; charset=utf-8",
+		success : function(result, status, xhr) {
+			if (callback) {
+				callback(result);
+			}			
+		},
+		error : function(xhr, status, er) {
+			if (error) {
+				error(er);
+			}			
+		}
+	})
+} */
+
+</script>
